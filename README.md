@@ -6,19 +6,37 @@ Learning project: users deposit funds and the project owner can withdraw them
 # About the project
 
 ## Contract development kit used
-• Foundry
+- Foundry
 
 ## Libraries used
-• OpenZeppelin
-• Chainlink
-
-
+- OpenZeppelin
+- Chainlink
+-  DevOps
 
 
 # Getting started
 
+1. Clone the repository :
+```
 git clone https://github.com/MMarwin/foundry-fund-me-sol.git
 cd foundry-fund-me-sol
+```
+
+3. Install libraries : 
+- OpenZeppelin :
+```
+  forge install OpenZeppelin/openzeppelin-contracts --no-commit
+```
+- ChainLink :
+```
+  forge install smartcontractkit/chainlink-brownie-contracts@0.6.1 --no-commit
+```
+  
+- DevOps :
+```
+  forge install ChainAccelOrg/foundry-devops --no-commit
+```
+  
 
 
 ## Requirements
@@ -30,9 +48,9 @@ cd foundry-fund-me-sol
 # Credit
 
 This project was based on Patrick Collins aka Cyfrin courses.
-Learn Solidity, Blockchain Development, & Smart Contracts | Powered By AI - Full Course (7 - 11)
-Youtube video link : https://www.youtube.com/watch?v=sas02qSFZ74
-GitHub : https://github.com/Cyfrin/foundry-full-course-cu?tab=readme-ov-file#section-9-foundry-smart-contract-lottery
+- Learn Solidity, Blockchain Development, & Smart Contracts | Powered By AI - Full Course (7 - 11)
+- Youtube video link : https://www.youtube.com/watch?v=sas02qSFZ74
+- GitHub : https://github.com/Cyfrin/foundry-full-course-cu?tab=readme-ov-file#section-9-foundry-smart-contract-lottery
 
 
 # License
