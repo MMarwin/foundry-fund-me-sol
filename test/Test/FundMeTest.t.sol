@@ -3,8 +3,8 @@
 pragma solidity ^0.8.18;
 
 import {Test, console} from "forge-std/Test.sol";
-import {FundMe} from "../src/FundMe.sol";
-import {DeployFundMe} from "../script/DeployFundMe.s.sol";
+import {FundMe} from "../../src/FundMe.sol";
+import {DeployFundMe} from "../../script/DeployFundMe.s.sol";
 
 contract FundMeTest is Test {
     FundMe fundMe;
@@ -49,13 +49,13 @@ contract FundMeTest is Test {
         */
         address owner = 0x1804c8AB1F12E6bbf3894d4083f33e07309d1f38;
         vm.prank(owner);
-        fundMe.withdraw();
+        fundMe.cheaperWithdraw();
     }
 
     function testCallWithdrawFailIfNotOwnerCallIt() public prank {
         vm.prank(USER);
         vm.expectRevert();
-        fundMe.withdraw();
+        fundMe.cheaperWithdraw();
     }
 
     function testWithdrawWithASingleFunder() public prank {
@@ -63,32 +63,12 @@ contract FundMeTest is Test {
         uint256 startingFundMeBalance = address(fundMe).balance;
 
         vm.prank(fundMe.getOwner());
-        fundMe.withdraw();
+        fundMe.cheaperWithdraw();
 
         uint256 endingOwnerBalance = fundMe.getOwner().balance;
         uint256 endingFundMeBalance = address(fundMe).balance;
         assertEq(endingFundMeBalance, 0);
         assertEq(endingOwnerBalance, startingOwnerBalance + startingFundMeBalance);
-    }
-
-    function testWithdrawWithMultipleFunders() public prank {
-        uint160 numberOfFunders = 10;
-        uint160 startingFundersIndex = 1;
-
-        for (uint160 i = startingFundersIndex; i < numberOfFunders; i++) {
-            hoax(address(i), BALANCE);
-            fundMe.fund{value: SENDING_VALUE}();
-        }
-
-        uint256 startingOwnerBalance = fundMe.getOwner().balance;
-        uint256 startingFundMeBalance = address(fundMe).balance;
-
-        vm.startPrank(fundMe.getOwner());
-        fundMe.withdraw();
-        vm.stopPrank();
-
-        assert(address(fundMe).balance == 0);
-        assert(startingOwnerBalance + startingFundMeBalance == fundMe.getOwner().balance);
     }
 
     function testCheaperWithdrawWithMultipleFunders() public prank {

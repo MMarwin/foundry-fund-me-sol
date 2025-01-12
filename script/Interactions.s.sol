@@ -24,7 +24,7 @@ contract FundFundMe is Script {
 contract WithdrawFundMe is Script {
     function withdrawFundMe(address mostRecentlyDeployed) public {
         vm.startBroadcast();
-        FundMe(payable(mostRecentlyDeployed)).withdraw();
+        FundMe(payable(mostRecentlyDeployed)).cheaperWithdraw();
         vm.stopBroadcast();
         console.log("Withdraw FundMe balance!");
     }
